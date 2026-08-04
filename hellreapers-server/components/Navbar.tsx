@@ -37,7 +37,7 @@ export default function Navbar({ logoUrl, linkDiscord, jugadores }: NavbarProps)
         </nav>
 
         <div className="flex items-center gap-3">
-          <div className="hidden lg:flex items-center gap-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded text-xs font-mono">
+          <div className="hidden lg:flex h-10 items-center gap-2 bg-slate-900 border border-slate-800 px-3 rounded text-xs font-mono">
             <span
               className={`w-2.5 h-2.5 rounded-full ${
                 jugadores.cargando
