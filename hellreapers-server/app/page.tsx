@@ -9,7 +9,7 @@ export default function Home() {
   const IP_PARA_CONSULTAR = 'photography-representations.gl.joinmc.link:30921';
 
   const LINK_DISCORD = 'https://discord.gg/gmXx5bMUg';
-  const LINK_MODPACK = '/mods/mods.zip';
+  const LINK_MODPACK = 'https://www.mediafire.com/file/nni1zhcgnyz0ks6/mods.zip/file';
   const URL_IMAGEN_FONDO = '/images/banner.png';
 
   const [copiado, setCopiado] = useState(false);
