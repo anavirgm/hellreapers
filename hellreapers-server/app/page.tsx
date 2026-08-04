@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 
 export default function Home() {
-  // TIP: Si tienes la IP real o un subdominio propio, la respuesta de la API será inmediata.
   const IP_SERVIDOR = 'photography-representations.gl.joinmc.link';
   const LINK_DISCORD = 'https://discord.gg/tu-comunidad';
   const LINK_MODPACK = 'https://mediafire.com/tu-modpack-1.20.1';
@@ -14,11 +13,11 @@ export default function Home() {
   const [modalContenido, setModalContenido] = useState<'terminos' | 'privacidad' | null>(null);
   const [jugadores, setJugadores] = useState({ online: 0, max: 0, activo: false, cargando: true });
 
-  // Petición con límite de tiempo de 3.5s para evitar que se quede pegado cargando
+  // Petición al servidor de Minecraft
   useEffect(() => {
     const consultarServidor = async () => {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 3500); // 3.5 segundos máximo
+      const timeoutId = setTimeout(() => controller.abort(), 4000); // 4s máximo de espera
 
       try {
         const res = await fetch(`https://api.mcsrvstat.us/3/${IP_SERVIDOR}`, {
@@ -38,20 +37,42 @@ export default function Home() {
           setJugadores({ online: 0, max: 0, activo: false, cargando: false });
         }
       } catch (error) {
-        // Si cancela por tiempo excedido o error de red
         setJugadores({ online: 0, max: 0, activo: false, cargando: false });
       }
     };
 
     consultarServidor();
-    const intervalo = setInterval(consultarServidor, 30000); // Revisa cada 30s
+    const intervalo = setInterval(consultarServidor, 30000);
     return () => clearInterval(intervalo);
   }, [IP_SERVIDOR]);
 
-  const copiarIP = () => {
-    navigator.clipboard.writeText(IP_SERVIDOR);
-    setCopiado(true);
-    setTimeout(() => setCopiado(false), 2000);
+  // FUNCIÓN DE COPIAR COMPATIBLE Y A PRUEBA DE ERRORES
+  const copiarIP = async () => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(IP_SERVIDOR);
+      } else {
+        // Fallback para navegadores antiguos o entornos sin HTTPS
+        const textArea = document.createElement('textarea');
+        textArea.value = IP_SERVIDOR;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+      setCopiado(true);
+      setTimeout(() => setCopiado(false), 2000);
+    } catch (err) {
+      console.error('Error al copiar:', err);
+    }
+  };
+
+  // Alternar el estado de las reglas desplegables
+  const toggleRegla = (id: number) => {
+    setReglaAbierta((prev) => (prev === id ? null : id));
   };
 
   const stats = [
@@ -83,7 +104,6 @@ export default function Home() {
       {/* 1. NAVBAR */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#0b0f17]/95 backdrop-blur-md border-b-2 border-slate-800">
         <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
-          
           <a href="#" className="flex items-center gap-3 group">
             <div className="w-10 h-10 rounded-lg bg-slate-800 border-2 border-slate-600 flex items-center justify-center text-xl shadow-md group-hover:border-sky-400 transition">
               ⚔️
@@ -100,7 +120,6 @@ export default function Home() {
             <a href="#reglas" className="hover:text-slate-100 transition">REGLAS</a>
           </nav>
 
-          {/* ESTADO EN TIEMPO REAL */}
           <div className="flex items-center gap-3">
             <div className="hidden lg:flex items-center gap-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded text-xs font-mono">
               <span
@@ -130,7 +149,6 @@ export default function Home() {
               DISCORD ↗
             </a>
           </div>
-
         </div>
       </header>
 
@@ -161,15 +179,16 @@ export default function Home() {
             Explora un mundo cúbico infinito potenciado con aventura, magia ancestral y una comunidad activa.
           </p>
 
-          {/* BOTÓN COPIAR IP */}
+          {/* BOTÓN COPIAR IP CORREGIDO */}
           <div className="pt-4 max-w-lg mx-auto">
             <div className="mc-card-highlight p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-left px-2">
                 <span className="text-[10px] font-minecraft text-slate-400 uppercase block mb-1">DIRECCIÓN IP</span>
-                <span className="text-base font-mono font-bold text-slate-100">{IP_SERVIDOR}</span>
+                <span className="text-base font-mono font-bold text-slate-100 select-all">{IP_SERVIDOR}</span>
               </div>
 
               <button
+                type="button"
                 onClick={copiarIP}
                 className="w-full sm:w-auto btn-mc-emerald text-white font-minecraft text-[10px] px-5 py-3 rounded cursor-pointer active:scale-95 transition"
               >
@@ -252,7 +271,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. REGLAS DESPLEGABLES (CORREGIDAS) */}
+      {/* 5. REGLAS DESPLEGABLES CORREGIDAS */}
       <section id="reglas" className="py-20 px-4 max-w-4xl mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-2xl sm:text-3xl font-minecraft text-white">REGLAS DEL SERVIDOR</h2>
@@ -263,11 +282,11 @@ export default function Home() {
           {reglas.map((r) => {
             const isOpen = reglaAbierta === r.id;
             return (
-              <div key={r.id} className="mc-card rounded-xl overflow-hidden transition-all">
+              <div key={r.id} className="mc-card rounded-xl overflow-hidden border border-slate-800">
                 <button
                   type="button"
-                  onClick={() => setReglaAbierta(isOpen ? null : r.id)}
-                  className="w-full p-5 text-left flex items-center justify-between cursor-pointer focus:outline-none"
+                  onClick={() => toggleRegla(r.id)}
+                  className="w-full p-5 text-left flex items-center justify-between cursor-pointer focus:outline-none hover:bg-slate-800/40 transition-colors"
                 >
                   <div className="flex items-center gap-4">
                     <span className="w-8 h-8 rounded bg-slate-800 border border-slate-700 flex items-center justify-center font-minecraft text-slate-200 text-xs">
@@ -281,7 +300,7 @@ export default function Home() {
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-1 border-t border-slate-800/80">
+                  <div className="px-5 pb-5 pt-2 border-t border-slate-800/80 bg-slate-900/30">
                     <p className="text-slate-300 text-sm sm:pl-12 leading-relaxed">
                       {r.d}
                     </p>
@@ -314,12 +333,14 @@ export default function Home() {
               <p>© {new Date().getFullYear()} Hellreapers. No afiliado con Mojang / Microsoft.</p>
               <div className="flex gap-4">
                 <button
+                  type="button"
                   onClick={() => setModalContenido('terminos')}
                   className="text-sky-400 hover:underline cursor-pointer"
                 >
                   Términos y Condiciones
                 </button>
                 <button
+                  type="button"
                   onClick={() => setModalContenido('privacidad')}
                   className="text-sky-400 hover:underline cursor-pointer"
                 >
@@ -335,8 +356,8 @@ export default function Home() {
       {modalContenido && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
           <div className="mc-card-highlight max-w-2xl w-full p-6 sm:p-8 rounded-2xl relative space-y-4 max-h-[85vh] overflow-y-auto">
-            
             <button
+              type="button"
               onClick={() => setModalContenido(null)}
               className="absolute top-4 right-4 text-slate-400 hover:text-white font-mono text-xl font-bold bg-slate-800 px-3 py-1 rounded border border-slate-700 cursor-pointer"
             >
@@ -365,13 +386,13 @@ export default function Home() {
 
             <div className="pt-4 text-right">
               <button
+                type="button"
                 onClick={() => setModalContenido(null)}
                 className="btn-mc-diamond text-white font-minecraft text-xs px-5 py-2.5 rounded cursor-pointer"
               >
                 ENTENDIDO
               </button>
             </div>
-
           </div>
         </div>
       )}
