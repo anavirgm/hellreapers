@@ -1,23 +1,40 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Navbar from '@/components/Navbar';
+import HeroSection from '@/components/HeroSection';
+import InstalacionSection from '@/components/InstalacionSection';
+import GaleriaSection from '@/components/GaleriaSection';
+import ModsSection from '@/components/ModsSection';
+import ReglasSection from '@/components/ReglasSection';
+import Footer from '@/components/Footer';
 
 export default function Home() {
-  // IP o Subdominio que el usuario copiará
   const IP_MOSTRADA = 'photography-representations.gl.joinmc.link';
-
   const IP_PARA_CONSULTAR = 'photography-representations.gl.joinmc.link:30921';
-
   const LINK_DISCORD = 'https://discord.gg/gmXx5bMUg';
   const LINK_MODPACK = 'https://www.mediafire.com/file/nni1zhcgnyz0ks6/mods.zip/file';
   const URL_IMAGEN_FONDO = '/images/banner.png';
+  const URL_LOGO = '/favicon.ico';
 
   const [copiado, setCopiado] = useState(false);
-  const [reglaAbierta, setReglaAbierta] = useState<number | null>(null);
   const [modalContenido, setModalContenido] = useState<'terminos' | 'privacidad' | null>(null);
-  const [jugadores, setJugadores] = useState({ online: 0, max: 0, activo: false, cargando: true });
+  const [imagenModal, setImagenModal] = useState<string | null>(null);
 
-  // Consulta de estado en tiempo real usando mcstatus.io (compatible con Playit/tunneling)
+  const [jugadores, setJugadores] = useState<{
+    online: number;
+    max: number;
+    activo: boolean;
+    cargando: boolean;
+    lista: { name: string; uuid: string }[];
+  }>({
+    online: 0,
+    max: 0,
+    activo: false,
+    cargando: true,
+    lista: [],
+  });
+
   useEffect(() => {
     const consultarServidor = async () => {
       try {
@@ -30,21 +47,21 @@ export default function Home() {
             max: data.players?.max || 0,
             activo: true,
             cargando: false,
+            lista: data.players?.list || [],
           });
         } else {
-          setJugadores({ online: 0, max: 0, activo: false, cargando: false });
+          setJugadores({ online: 0, max: 0, activo: false, cargando: false, lista: [] });
         }
       } catch (error) {
-        setJugadores({ online: 0, max: 0, activo: false, cargando: false });
+        setJugadores({ online: 0, max: 0, activo: false, cargando: false, lista: [] });
       }
     };
 
     consultarServidor();
-    const intervalo = setInterval(consultarServidor, 15000); // Consulta cada 15 segundos
+    const intervalo = setInterval(consultarServidor, 15000);
     return () => clearInterval(intervalo);
   }, [IP_PARA_CONSULTAR]);
 
-  // Copia la IP al portapapeles con fallback seguro
   const copiarIP = async () => {
     try {
       if (navigator.clipboard && window.isSecureContext) {
@@ -67,10 +84,6 @@ export default function Home() {
     }
   };
 
-  const toggleRegla = (id: number) => {
-    setReglaAbierta((prev) => (prev === id ? null : id));
-  };
-
   const stats = [
     { label: 'VERSIÓN', val: '1.20.1', color: 'text-slate-100' },
     { label: 'RENDIMIENTO', val: '20 TPS', color: 'text-emerald-400' },
@@ -87,6 +100,12 @@ export default function Home() {
     { nombre: 'Waystones', cat: 'Viaje', desc: 'Puntos de teletransporte para moverte velozmente por todo el mapa.', icono: '🗿' },
   ];
 
+  const capturasGaleria = [
+    { url: '/images/banner.png', titulo: 'Naturaleza Impresionante', desc: 'Biomas generados con Terralith' },
+    { url: '/images/banner.png', titulo: 'La Dimensión del Aether', desc: 'Islas flotantes y jefes legendarios' },
+    { url: '/images/banner.png', titulo: 'Comunidad en Acción', desc: 'Bases y construcciones en equipo' },
+  ];
+
   const reglas = [
     { id: 1, t: 'Respeto mutuo y buena convivencia', d: 'Prohibido el acoso, la discriminación, Insultos o la toxicidad en los chats del juego o Discord.' },
     { id: 2, t: 'Prohibido el uso de Cheats / X-Ray', d: 'El uso de hacks, clientes modificados no autorizados o X-Ray resultará en baneo permanente.' },
@@ -96,261 +115,46 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#0b0f17] bg-mc-pattern text-slate-100 relative selection:bg-slate-700 selection:text-white">
-      
-      {/* 1. NAVBAR */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#0b0f17]/95 backdrop-blur-md border-b-2 border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-3 group">
-            <img 
-              src="/favicon.ico" 
-              alt="Hellreapers Logo" 
-              className="w-12 h-12 object-contain group-hover:scale-105 transition-transform"
+      <Navbar logoUrl={URL_LOGO} linkDiscord={LINK_DISCORD} jugadores={jugadores} />
+
+      <HeroSection
+        bgUrl={URL_IMAGEN_FONDO}
+        logoUrl={URL_LOGO}
+        ipMostrada={IP_MOSTRADA}
+        copiado={copiado}
+        copiarIP={copiarIP}
+        jugadores={jugadores}
+        stats={stats}
+      />
+
+      <InstalacionSection linkModpack={LINK_MODPACK} />
+
+      <GaleriaSection capturas={capturasGaleria} onSelectImage={(url) => setImagenModal(url)} />
+
+      <ModsSection mods={modsPrincipales} />
+
+      <ReglasSection reglas={reglas} />
+
+      <Footer logoUrl={URL_LOGO} onOpenModal={(tipo) => setModalContenido(tipo)} />
+
+      {/* MODAL VISOR DE CAPTURAS DE PANTALLA */}
+      {imagenModal && (
+        <div
+          onClick={() => setImagenModal(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md cursor-pointer"
+        >
+          <div className="relative max-w-5xl w-full flex flex-col items-center">
+            <img
+              src={imagenModal}
+              alt="Captura ampliada"
+              className="max-h-[85vh] w-auto rounded-xl border-2 border-slate-700 shadow-2xl object-contain"
             />
-            <span className="font-minecraft text-sm tracking-wider text-slate-100 uppercase">
-              HELLREAPERS
-            </span>
-          </a>
-
-          <nav className="hidden md:flex items-center gap-6 text-xs font-minecraft tracking-wider text-slate-400">
-            <a href="#inicio" className="hover:text-slate-100 transition">INICIO</a>
-            <a href="#instalacion" className="hover:text-slate-100 transition">TUTORIAL</a>
-            <a href="#mods" className="hover:text-slate-100 transition">MODS</a>
-            <a href="#reglas" className="hover:text-slate-100 transition">REGLAS</a>
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <div className="hidden lg:flex items-center gap-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded text-xs font-mono">
-              <span
-                className={`w-2.5 h-2.5 rounded-full ${
-                  jugadores.cargando
-                    ? 'bg-amber-400 animate-ping'
-                    : jugadores.activo
-                    ? 'bg-emerald-400 animate-pulse'
-                    : 'bg-rose-500'
-                }`}
-              />
-              <span className="text-slate-300 font-bold uppercase">
-                {jugadores.cargando
-                  ? 'CARGANDO...'
-                  : jugadores.activo
-                  ? `${jugadores.online}/${jugadores.max} ONLINE`
-                  : 'OFFLINE'}
-              </span>
-            </div>
-
-            <a
-              href={LINK_DISCORD}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-mc-diamond text-white font-minecraft text-[10px] px-4 py-2.5 rounded tracking-wider"
-            >
-              DISCORD ↗
-            </a>
+            <p className="text-slate-400 text-xs font-minecraft mt-4">Haz clic en cualquier lugar para cerrar</p>
           </div>
         </div>
-      </header>
+      )}
 
-      {/* 2. HERO SECTION */}
-      <section id="inicio" className="relative w-full min-h-screen flex items-center justify-center pt-28 pb-16 px-4 overflow-hidden">
-        <div className="absolute inset-0 w-full h-full z-0">
-          <img
-            src={URL_IMAGEN_FONDO}
-            alt="Hellreapers Background"
-            className="w-full h-full object-cover object-center scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f17]/60 via-[#0b0f17]/85 to-[#0b0f17]" />
-        </div>
-
-        <div className="max-w-5xl mx-auto text-center space-y-6 relative z-10">
-          <div className="inline-flex items-center gap-2 bg-slate-900/90 border border-slate-700 text-slate-300 text-base font-minecraft px-4 py-2 rounded shadow-lg">
-            <span>⚔️</span> SURVIVAL MODDED 1.20.1 
-          </div>
-
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-none drop-shadow-2xl">
-            ¡BIENVENIDO A <br />
-            <span className="font-minecraft text-sky-400 mc-text-glow text-3xl sm:text-5xl lg:text-6xl block mt-3">
-              HELLREAPERS!
-            </span>
-          </h1>
-
-          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed">
-            Explora un mundo cúbico infinito potenciado con aventura, magia ancestral y una comunidad activa.
-          </p>
-
-          {/* BOTÓN COPIAR IP */}
-          <div className="pt-4 max-w-lg mx-auto">
-            <div className="mc-card-highlight p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="text-left px-2">
-                <span className="text-[10px] font-minecraft text-slate-400 uppercase block mb-1">DIRECCIÓN IP</span>
-                <span className="text-base font-mono font-bold text-slate-100 select-all">{IP_MOSTRADA}</span>
-              </div>
-
-              <button
-                type="button"
-                onClick={copiarIP}
-                className="w-full sm:w-auto btn-mc-emerald text-white font-minecraft text-[10px] px-5 py-3 rounded cursor-pointer active:scale-95 transition"
-              >
-                {copiado ? '¡COPIADO!' : 'COPIAR IP'}
-              </button>
-            </div>
-          </div>
-
-          <div className="pt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {stats.map((s, i) => (
-              <div key={i} className="mc-card p-4 rounded-xl text-center border-l-4 border-l-slate-600">
-                <span className={`text-xl font-black block ${s.color}`}>{s.val}</span>
-                <span className="text-[10px] font-minecraft text-slate-400 block mt-1">{s.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. INSTALACIÓN */}
-      <section id="instalacion" className="py-20 px-4 max-w-7xl mx-auto">
-        <div className="mc-card-highlight p-8 md:p-12 rounded-3xl relative overflow-hidden">
-          <div className="max-w-2xl mb-10">
-            <span className="text-slate-400 font-minecraft text-[10px] uppercase">PASO A PASO</span>
-            <h2 className="text-2xl sm:text-3xl font-minecraft text-white mt-2">¿CÓMO ENTRAR?</h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { paso: '01', title: 'Java 17', desc: 'Instala Java 17 de 64 bits en tu equipo.' },
-              { paso: '02', title: 'Forge 1.20.1', desc: 'Descarga e instala Forge para la versión 1.20.1.' },
-              { paso: '03', title: 'Descargar Zip', desc: 'Obtén el archivo comprimido del modpack.' },
-              { paso: '04', title: 'Pegar Mods', desc: 'Descomprime y copia los mods en tu carpeta .minecraft/mods.' },
-            ].map((p, idx) => (
-              <div key={idx} className="bg-slate-900/90 p-5 rounded-xl border border-slate-700 space-y-2">
-                <span className="font-minecraft text-base text-slate-200 block">{p.paso}</span>
-                <h3 className="text-base font-bold text-white">{p.title}</h3>
-                <p className="text-slate-400 text-xs leading-relaxed">{p.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-10 text-center">
-            <a
-              href={LINK_MODPACK}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-block btn-mc-emerald text-white font-minecraft text-xs px-8 py-4 rounded cursor-pointer"
-            >
-              📥 DESCARGAR MODPACK (.ZIP)
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. MODS */}
-      <section id="mods" className="py-16 px-4 max-w-7xl mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <h2 className="text-2xl sm:text-3xl font-minecraft text-white tracking-wide">
-            MODS DESTACADOS
-          </h2>
-          <p className="text-slate-400 mt-2 text-sm">
-            Una selección de los mods instalados en el servidor para enriquecer la experiencia.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {modsPrincipales.map((mod, index) => (
-            <div key={index} className="mc-card p-6 rounded-2xl space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-3xl">{mod.icono}</span>
-                <span className="text-[10px] font-minecraft text-slate-300 bg-slate-800 border border-slate-700 px-2.5 py-1 rounded">
-                  {mod.cat}
-                </span>
-              </div>
-              <h3 className="text-lg font-bold text-white">{mod.nombre}</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">{mod.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 5. REGLAS DESPLEGABLES */}
-      <section id="reglas" className="py-20 px-4 max-w-4xl mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-2xl sm:text-3xl font-minecraft text-white">REGLAS DEL SERVIDOR</h2>
-          <p className="text-xs text-slate-400 mt-2">Haz clic en cualquier regla para desplegar la información</p>
-        </div>
-
-        <div className="space-y-4">
-          {reglas.map((r) => {
-            const isOpen = reglaAbierta === r.id;
-            return (
-              <div key={r.id} className="mc-card rounded-xl overflow-hidden border border-slate-800">
-                <button
-                  type="button"
-                  onClick={() => toggleRegla(r.id)}
-                  className="w-full p-5 text-left flex items-center justify-between cursor-pointer focus:outline-none hover:bg-slate-800/40 transition-colors"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="w-8 h-8 rounded bg-slate-800 border border-slate-700 flex items-center justify-center font-minecraft text-slate-200 text-xs">
-                      0{r.id}
-                    </span>
-                    <h3 className="font-bold text-white text-base">{r.t}</h3>
-                  </div>
-                  <span className="text-slate-300 font-bold text-xl font-mono px-2.5 py-0.5 rounded bg-slate-800 border border-slate-700">
-                    {isOpen ? '−' : '+'}
-                  </span>
-                </button>
-
-                {isOpen && (
-                  <div className="px-5 pb-5 pt-2 border-t border-slate-800/80 bg-slate-900/30">
-                    <p className="text-slate-300 text-sm sm:pl-12 leading-relaxed">
-                      {r.d}
-                    </p>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* 6. FOOTER */}
-      <footer className="border-t-2 border-slate-800 bg-[#070a10] py-12 px-4 mt-20">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-xs text-slate-400">
-          <div>
-            <span className="font-minecraft text-sm text-slate-200 uppercase block mb-3">HELLREAPERS</span>
-            <p>Servidor Survival Modded de Minecraft 1.20.1.</p>
-          </div>
-          <div>
-            <span className="font-minecraft text-[10px] text-white uppercase block mb-3">Navegación</span>
-            <p className="space-x-2">
-              <a href="#inicio" className="hover:text-slate-200">Inicio</a> • 
-              <a href="#mods" className="hover:text-slate-200">Mods</a> • 
-              <a href="#instalacion" className="hover:text-slate-200">Tutorial</a>
-            </p>
-          </div>
-          <div>
-            <span className="font-minecraft text-[10px] text-white uppercase block mb-3">Legal</span>
-            <div className="space-y-2">
-              <p>© {new Date().getFullYear()} Hellreapers. No afiliado con Mojang / Microsoft.</p>
-              <div className="flex gap-4">
-                <button
-                  type="button"
-                  onClick={() => setModalContenido('terminos')}
-                  className="text-sky-400 hover:underline cursor-pointer"
-                >
-                  Términos y Condiciones
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setModalContenido('privacidad')}
-                  className="text-sky-400 hover:underline cursor-pointer"
-                >
-                  Política de Privacidad
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      {/* 7. MODAL LEGAL */}
+      {/* MODAL LEGAL */}
       {modalContenido && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
           <div className="mc-card-highlight max-w-2xl w-full p-6 sm:p-8 rounded-2xl relative space-y-4 max-h-[85vh] overflow-y-auto">
@@ -394,7 +198,6 @@ export default function Home() {
           </div>
         </div>
       )}
-
     </div>
   );
 }
