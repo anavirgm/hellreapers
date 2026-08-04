@@ -77,32 +77,49 @@ export default function HeroSection({
           </div>
         </div>
 
-        {jugadores.activo && jugadores.online > 0 && (
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-            <div className="flex -space-x-3 overflow-hidden p-1">
-              {jugadores.lista.length > 0 ? (
-                jugadores.lista.slice(0, 5).map((player, idx) => (
-                  <img
-                    key={idx}
-                    src={`https://crafatar.com/avatars/${player.uuid || player.name}?size=40&overlay`}
-                    alt={player.name}
-                    title={player.name}
-                    className="inline-block h-9 w-9 rounded-md ring-2 ring-slate-900 bg-slate-800 object-cover"
-                  />
-                ))
-              ) : (
-                <img
-                  src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a973daf31?size=40&overlay"
-                  alt="Jugador"
-                  className="inline-block h-9 w-9 rounded-md ring-2 ring-slate-900 bg-slate-800"
-                />
-              )}
+        {/* AVATARES 3D DE JUGADORES EN VIVO */}
+{jugadores.activo && (
+  <div className="flex flex-col items-center justify-center gap-2 pt-2">
+    {jugadores.online > 0 ? (
+      <>
+        <div className="flex items-center -space-x-2 overflow-hidden p-1">
+          {jugadores.lista && jugadores.lista.length > 0 ? (
+            jugadores.lista.slice(0, 6).map((player, idx) => (
+              <img
+                key={idx}
+                src={`https://crafatar.com/avatars/${player.uuid || player.name}?size=36&overlay`}
+                alt={player.name}
+                title={player.name}
+                className="inline-block h-9 w-9 rounded-md ring-2 ring-slate-900 bg-slate-800 object-cover transform hover:scale-110 hover:z-10 transition-transform"
+              />
+            ))
+          ) : (
+            // Cabezas genéricas si la API no desglosa la lista exacta por privacidad
+            <div className="flex -space-x-2">
+              <img
+                src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a973daf31?size=36&overlay"
+                alt="Steve"
+                className="inline-block h-9 w-9 rounded-md ring-2 ring-slate-900 bg-slate-800"
+              />
+              <img
+                src="https://crafatar.com/avatars/61699704-d927-4a8b-b56f-dec2d56412d3?size=36&overlay"
+                alt="Alex"
+                className="inline-block h-9 w-9 rounded-md ring-2 ring-slate-900 bg-slate-800"
+              />
             </div>
-            <span className="text-xs text-slate-300 font-minecraft">
-              ¡{jugadores.online} {jugadores.online === 1 ? 'jugador explorando' : 'jugadores explorando'} ahora mismo!
-            </span>
-          </div>
-        )}
+          )}
+        </div>
+        <span className="text-xs text-slate-300 font-minecraft">
+          ¡<span className="text-emerald-400 font-bold">{jugadores.online}</span> {jugadores.online === 1 ? 'jugador explorando' : 'jugadores explorando'} el mapa ahora mismo!
+        </span>
+      </>
+    ) : (
+      <span className="text-xs text-slate-400 font-mono bg-slate-900/60 px-3 py-1 rounded-full border border-slate-800">
+        El servidor está en línea sin jugadores conectados. ¡Sé el primero en entrar!
+      </span>
+    )}
+  </div>
+)}
 
         <div className="pt-6 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
           {stats.map((s, i) => (
