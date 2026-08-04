@@ -101,9 +101,9 @@ export default function Home() {
   ];
 
   const capturasGaleria = [
-    { url: '/images/banner.png', titulo: 'Naturaleza Impresionante', desc: 'Biomas generados con Terralith' },
-    { url: '/images/banner.png', titulo: 'La Dimensión del Aether', desc: 'Islas flotantes y jefes legendarios' },
-    { url: '/images/banner.png', titulo: 'Comunidad en Acción', desc: 'Bases y construcciones en equipo' },
+    { url: '/images/barco.png', titulo: 'Naturaleza Impresionante', desc: 'Biomas generados con Terralith' },
+    { url: '/images/vaca.png', titulo: 'La Dimensión de Caramelo', desc: 'Islas de comida y jefes legendarios' },
+    { url: '/images/players.png', titulo: 'Comunidad en Acción', desc: 'Bases y construcciones en equipo' },
   ];
 
   const reglas = [
@@ -135,7 +135,11 @@ export default function Home() {
 
       <ReglasSection reglas={reglas} />
 
-      <Footer logoUrl={URL_LOGO} onOpenModal={(tipo) => setModalContenido(tipo)} />
+      <Footer
+        logoUrl={URL_LOGO}
+        linkDiscord={LINK_DISCORD}
+        onOpenModal={(tipo) => setModalContenido(tipo)}
+      />
 
       {/* MODAL VISOR DE CAPTURAS DE PANTALLA */}
       {imagenModal && (
