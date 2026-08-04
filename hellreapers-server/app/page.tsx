@@ -156,7 +156,7 @@ export default function Home() {
           <img
             src={URL_IMAGEN_FONDO}
             alt="Hellreapers Background"
-            className="w-full h-full object-cover object-center scale-105 filter brightness-75"
+            className="w-full h-full object-cover object-center scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f17]/60 via-[#0b0f17]/85 to-[#0b0f17]" />
         </div>
