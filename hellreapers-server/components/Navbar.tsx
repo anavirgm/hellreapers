@@ -62,7 +62,7 @@ export default function Navbar({ logoUrl, linkDiscord, jugadores }: NavbarProps)
             rel="noreferrer"
             className="btn-mc-diamond text-white font-minecraft text-[10px] px-4 py-2.5 rounded tracking-wider"
           >
-            DISCORD ↗
+            DISCORD
           </a>
         </div>
       </div>

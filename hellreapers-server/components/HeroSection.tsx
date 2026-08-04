@@ -46,7 +46,7 @@ export default function HeroSection({
         </div>
 
         <div className="inline-flex items-center gap-2 bg-slate-900/90 border border-slate-700 text-slate-300 text-base font-minecraft px-4 py-2 rounded shadow-lg">
-          <span>⚔️</span> SURVIVAL MODDED 1.20.1 
+           SURVIVAL MODDED 1.20.1 
         </div>
 
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-none drop-shadow-2xl">
