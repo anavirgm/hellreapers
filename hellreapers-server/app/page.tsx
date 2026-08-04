@@ -3,14 +3,19 @@
 import React, { useState, useEffect } from 'react';
 
 export default function Home() {
-  // IP que se le muestra al usuario para conectarse
+<<<<<<< HEAD
+  // IP o Subdominio que el usuario copiará
   const IP_MOSTRADA = 'photography-representations.gl.joinmc.link';
-  
-  // IP real para hacer la consulta técnica a la API sin bloqueos del túnel
-  const IP_API = '147.185.221.225'; 
 
+  const IP_PARA_CONSULTAR = 'photography-representations.gl.joinmc.link:30921';
+
+  const LINK_DISCORD = 'https://discord.gg/gmXx5bMUg';
+  const LINK_MODPACK = '/mods/mods.zip';
+=======
+  const IP_SERVIDOR = 'photography-representations.gl.joinmc.link';
   const LINK_DISCORD = 'https://discord.gg/tu-comunidad';
   const LINK_MODPACK = 'https://mediafire.com/tu-modpack-1.20.1';
+>>>>>>> parent of 114c6aa (Update page.tsx)
   const URL_IMAGEN_FONDO = '/images/banner.png';
 
   const [copiado, setCopiado] = useState(false);
@@ -18,15 +23,29 @@ export default function Home() {
   const [modalContenido, setModalContenido] = useState<'terminos' | 'privacidad' | null>(null);
   const [jugadores, setJugadores] = useState({ online: 0, max: 0, activo: false, cargando: true });
 
-  // Consulta de estado inmediata
+<<<<<<< HEAD
+  // Consulta de estado en tiempo real usando mcstatus.io (compatible con Playit/tunneling)
   useEffect(() => {
     const consultarServidor = async () => {
       try {
-        // Consultamos con la IP directa que obtuvimos de tu ping
-        const res = await fetch(`https://api.mcsrvstat.us/3/${IP_API}`);
+        const res = await fetch(`https://api.mcstatus.io/v2/status/java/${IP_PARA_CONSULTAR}`);
         const data = await res.json();
+=======
+  // Petición al servidor de Minecraft
+  useEffect(() => {
+    const consultarServidor = async () => {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 4000); // 4s máximo de espera
+>>>>>>> parent of 114c6aa (Update page.tsx)
 
-        if (data && data.online) {
+      try {
+        const res = await fetch(`https://api.mcsrvstat.us/3/${IP_SERVIDOR}`, {
+          signal: controller.signal,
+        });
+        const data = await res.json();
+        clearTimeout(timeoutId);
+
+        if (data.online) {
           setJugadores({
             online: data.players?.online || 0,
             max: data.players?.max || 0,
@@ -42,18 +61,27 @@ export default function Home() {
     };
 
     consultarServidor();
-    const intervalo = setInterval(consultarServidor, 15000); // Revisa cada 15 segundos
+<<<<<<< HEAD
+    const intervalo = setInterval(consultarServidor, 15000); // Consulta cada 15 segundos
     return () => clearInterval(intervalo);
-  }, [IP_API]);
+  }, [IP_PARA_CONSULTAR]);
 
-  // Copia el dominio que el usuario necesita en su juego
+  // Copia la IP al portapapeles con fallback seguro
+=======
+    const intervalo = setInterval(consultarServidor, 30000);
+    return () => clearInterval(intervalo);
+  }, [IP_SERVIDOR]);
+
+  // FUNCIÓN DE COPIAR COMPATIBLE Y A PRUEBA DE ERRORES
+>>>>>>> parent of 114c6aa (Update page.tsx)
   const copiarIP = async () => {
     try {
       if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(IP_MOSTRADA);
+        await navigator.clipboard.writeText(IP_SERVIDOR);
       } else {
+        // Fallback para navegadores antiguos o entornos sin HTTPS
         const textArea = document.createElement('textarea');
-        textArea.value = IP_MOSTRADA;
+        textArea.value = IP_SERVIDOR;
         textArea.style.position = 'fixed';
         textArea.style.left = '-999999px';
         document.body.appendChild(textArea);
@@ -69,7 +97,6 @@ export default function Home() {
     }
   };
 
-  // Alternar el estado de las reglas desplegables
   const toggleRegla = (id: number) => {
     setReglaAbierta((prev) => (prev === id ? null : id));
   };
@@ -180,12 +207,12 @@ export default function Home() {
             Explora un mundo cúbico infinito potenciado con aventura, magia ancestral y una comunidad activa.
           </p>
 
-          {/* BOTÓN COPIAR IP CORREGIDO */}
+          {/* BOTÓN COPIAR IP */}
           <div className="pt-4 max-w-lg mx-auto">
             <div className="mc-card-highlight p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-left px-2">
                 <span className="text-[10px] font-minecraft text-slate-400 uppercase block mb-1">DIRECCIÓN IP</span>
-                <span className="text-base font-mono font-bold text-slate-100 select-all">{IP_MOSTRADA}</span>
+                <span className="text-base font-mono font-bold text-slate-100 select-all">{IP_SERVIDOR}</span>
               </div>
 
               <button
@@ -272,7 +299,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. REGLAS DESPLEGABLES CORREGIDAS */}
+      {/* 5. REGLAS DESPLEGABLES */}
       <section id="reglas" className="py-20 px-4 max-w-4xl mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-2xl sm:text-3xl font-minecraft text-white">REGLAS DEL SERVIDOR</h2>
