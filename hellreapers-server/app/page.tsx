@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 
 export default function Home() {
-<<<<<<< HEAD
   // IP o Subdominio que el usuario copiará
   const IP_MOSTRADA = 'photography-representations.gl.joinmc.link';
 
@@ -11,11 +10,6 @@ export default function Home() {
 
   const LINK_DISCORD = 'https://discord.gg/gmXx5bMUg';
   const LINK_MODPACK = '/mods/mods.zip';
-=======
-  const IP_SERVIDOR = 'photography-representations.gl.joinmc.link';
-  const LINK_DISCORD = 'https://discord.gg/tu-comunidad';
-  const LINK_MODPACK = 'https://mediafire.com/tu-modpack-1.20.1';
->>>>>>> parent of 114c6aa (Update page.tsx)
   const URL_IMAGEN_FONDO = '/images/banner.png';
 
   const [copiado, setCopiado] = useState(false);
@@ -23,29 +17,14 @@ export default function Home() {
   const [modalContenido, setModalContenido] = useState<'terminos' | 'privacidad' | null>(null);
   const [jugadores, setJugadores] = useState({ online: 0, max: 0, activo: false, cargando: true });
 
-<<<<<<< HEAD
   // Consulta de estado en tiempo real usando mcstatus.io (compatible con Playit/tunneling)
   useEffect(() => {
     const consultarServidor = async () => {
       try {
         const res = await fetch(`https://api.mcstatus.io/v2/status/java/${IP_PARA_CONSULTAR}`);
         const data = await res.json();
-=======
-  // Petición al servidor de Minecraft
-  useEffect(() => {
-    const consultarServidor = async () => {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 4000); // 4s máximo de espera
->>>>>>> parent of 114c6aa (Update page.tsx)
 
-      try {
-        const res = await fetch(`https://api.mcsrvstat.us/3/${IP_SERVIDOR}`, {
-          signal: controller.signal,
-        });
-        const data = await res.json();
-        clearTimeout(timeoutId);
-
-        if (data.online) {
+        if (data && data.online) {
           setJugadores({
             online: data.players?.online || 0,
             max: data.players?.max || 0,
@@ -61,27 +40,18 @@ export default function Home() {
     };
 
     consultarServidor();
-<<<<<<< HEAD
     const intervalo = setInterval(consultarServidor, 15000); // Consulta cada 15 segundos
     return () => clearInterval(intervalo);
   }, [IP_PARA_CONSULTAR]);
 
   // Copia la IP al portapapeles con fallback seguro
-=======
-    const intervalo = setInterval(consultarServidor, 30000);
-    return () => clearInterval(intervalo);
-  }, [IP_SERVIDOR]);
-
-  // FUNCIÓN DE COPIAR COMPATIBLE Y A PRUEBA DE ERRORES
->>>>>>> parent of 114c6aa (Update page.tsx)
   const copiarIP = async () => {
     try {
       if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(IP_SERVIDOR);
+        await navigator.clipboard.writeText(IP_MOSTRADA);
       } else {
-        // Fallback para navegadores antiguos o entornos sin HTTPS
         const textArea = document.createElement('textarea');
-        textArea.value = IP_SERVIDOR;
+        textArea.value = IP_MOSTRADA;
         textArea.style.position = 'fixed';
         textArea.style.left = '-999999px';
         document.body.appendChild(textArea);
@@ -212,7 +182,7 @@ export default function Home() {
             <div className="mc-card-highlight p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-left px-2">
                 <span className="text-[10px] font-minecraft text-slate-400 uppercase block mb-1">DIRECCIÓN IP</span>
-                <span className="text-base font-mono font-bold text-slate-100 select-all">{IP_SERVIDOR}</span>
+                <span className="text-base font-mono font-bold text-slate-100 select-all">{IP_MOSTRADA}</span>
               </div>
 
               <button
