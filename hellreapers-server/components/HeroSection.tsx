@@ -77,7 +77,7 @@ export default function HeroSection({
           </div>
         </div>
 
-        {/* AVATARES 3D DE JUGADORES EN VIVO */}
+        {/* AVATARES EN VIVO USANDO VISAGE API */}
 {jugadores.activo && (
   <div className="flex flex-col items-center justify-center gap-2 pt-2">
     {jugadores.online > 0 ? (
@@ -87,22 +87,27 @@ export default function HeroSection({
             jugadores.lista.slice(0, 6).map((player, idx) => (
               <img
                 key={idx}
-                src={`https://crafatar.com/avatars/${player.uuid || player.name}?size=36&overlay`}
+                /* Visage usa el nombre o UUID para generar la cara renderizada con overlay */
+                src={`https://visage.surgeplay.com/face/64/${player.uuid || player.name}`}
                 alt={player.name}
                 title={player.name}
+                onError={(e) => {
+                  // Fallback automático a Minotar si la skin falla en cargar
+                  (e.target as HTMLImageElement).src = `https://minotar.net/helm/${player.name}/64.png`;
+                }}
                 className="inline-block h-9 w-9 rounded-md ring-2 ring-slate-900 bg-slate-800 object-cover transform hover:scale-110 hover:z-10 transition-transform"
               />
             ))
           ) : (
-            // Cabezas genéricas si la API no desglosa la lista exacta por privacidad
+            // Avatares por defecto de Steve y Alex si el servidor no envía la lista por privacidad
             <div className="flex -space-x-2">
               <img
-                src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a973daf31?size=36&overlay"
+                src="https://visage.surgeplay.com/face/64/MHF_Steve"
                 alt="Steve"
                 className="inline-block h-9 w-9 rounded-md ring-2 ring-slate-900 bg-slate-800"
               />
               <img
-                src="https://crafatar.com/avatars/61699704-d927-4a8b-b56f-dec2d56412d3?size=36&overlay"
+                src="https://visage.surgeplay.com/face/64/MHF_Alex"
                 alt="Alex"
                 className="inline-block h-9 w-9 rounded-md ring-2 ring-slate-900 bg-slate-800"
               />
@@ -120,7 +125,6 @@ export default function HeroSection({
     )}
   </div>
 )}
-
         <div className="pt-6 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
           {stats.map((s, i) => (
             <div key={i} className="mc-card p-4 rounded-xl text-center border-l-4 border-l-slate-600">
