@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;900&family=Press+Start+2P&display=swap');
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #0f172a; /* Fondo Piedra Oscura con tinte azul noche */
+  color: #f1f5f9;
+  overflow-x: hidden;
+}
+
+/* Tipografía Pixel */
+.font-minecraft {
+  font-family: 'Press Start 2P', monospace;
+}
+
+/* Patrón sutil estilo cuadrícula de bloques */
+.bg-mc-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+/* Tarjeta estilo Inventario (Gris Piedra + Bordes Diamante/Obsidiana) */
+.mc-card {
+  background: rgba(30, 41, 59, 0.85);
+  backdrop-filter: blur(8px);
+  border: 2px solid #334155;
+  border-bottom: 4px solid #1e293b; /* Relieve 3D */
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
+  transition: all 0.2s ease;
+}
+
+.mc-card:hover {
+  border-color: #0ea5e9; /* Brillo azul diamante suave */
+  border-bottom-color: #0284c7;
+  transform: translateY(-3px);
+}
+
+/* Tarjeta Destacada con Borde de Lapislázuli/Obsidiana */
+.mc-card-highlight {
+  background: rgba(15, 23, 42, 0.95);
+  border: 2px solid #0284c7;
+  border-bottom: 4px solid #0369a1;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+}
+
+/* Botón Esmeralda (Acciones clave) */
+.btn-mc-emerald {
+  background: linear-gradient(180deg, #22c55e 0%, #15803d 100%);
+  border-top: 2px solid #86efac;
+  border-bottom: 4px solid #14532d;
+  border-left: 2px solid #22c55e;
+  border-right: 2px solid #22c55e;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.btn-mc-emerald:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+/* Botón Diamante (Discord / Enlaces) */
+.btn-mc-diamond {
+  background: linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
+  border-top: 2px solid #7dd3fc;
+  border-bottom: 4px solid #075985;
+  border-left: 2px solid #0ea5e9;
+  border-right: 2px solid #0ea5e9;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.btn-mc-diamond:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+/* Brillo Diamante */
+.mc-text-glow {
+  text-shadow: 0 0 14px rgba(56, 189, 248, 0.5);
+}
