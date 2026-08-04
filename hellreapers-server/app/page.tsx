@@ -105,9 +105,11 @@ export default function Home() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#0b0f17]/95 backdrop-blur-md border-b-2 border-slate-800">
         <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
           <a href="#" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-lg bg-slate-800 border-2 border-slate-600 flex items-center justify-center text-xl shadow-md group-hover:border-sky-400 transition">
-              ⚔️
-            </div>
+            <img 
+              src="/favicon.ico" 
+              alt="Hellreapers Logo" 
+              className="w-12 h-12 object-contain group-hover:scale-105 transition-transform"
+            />
             <span className="font-minecraft text-sm tracking-wider text-slate-100 uppercase">
               HELLREAPERS
             </span>
