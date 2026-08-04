@@ -78,7 +78,7 @@ export default function Home() {
   const stats = [
     { label: 'VERSIÓN', val: '1.20.1', color: 'text-slate-100' },
     { label: 'RENDIMIENTO', val: '20 TPS', color: 'text-emerald-400' },
-    { label: 'MODS', val: '+100', color: 'text-slate-100' },
+    { label: 'MODS', val: '+80', color: 'text-slate-100' },
     { label: 'COMUNIDAD', val: 'DISCORD', color: 'text-sky-400' },
   ];
 
@@ -199,7 +199,7 @@ export default function Home() {
 
           <div className="pt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {stats.map((s, i) => (
-              <div key={i} className="mc-card p-4 rounded-xl text-left border-l-4 border-l-slate-600">
+              <div key={i} className="mc-card p-4 rounded-xl text-center border-l-4 border-l-slate-600">
                 <span className={`text-xl font-black block ${s.color}`}>{s.val}</span>
                 <span className="text-[10px] font-minecraft text-slate-400 block mt-1">{s.label}</span>
               </div>
