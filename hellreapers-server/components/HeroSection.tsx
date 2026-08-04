@@ -60,17 +60,17 @@ export default function HeroSection({
           Explora un mundo cúbico infinito potenciado con aventura, magia ancestral y una comunidad activa.
         </p>
 
-        <div className="pt-2 max-w-lg mx-auto">
+        <div className="pt-2 max-w-2xl mx-auto">
           <div className="mc-card-highlight p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-left px-2">
               <span className="text-[10px] font-minecraft text-slate-400 uppercase block mb-1">DIRECCIÓN IP</span>
-              <span className="text-base font-mono font-bold text-slate-100 select-all">{ipMostrada}</span>
+              <span className="text-base font-mono font-bold text-slate-100 select-all whitespace-nowrap">{ipMostrada}</span>
             </div>
 
             <button
               type="button"
               onClick={copiarIP}
-              className="w-full sm:w-auto btn-mc-emerald text-white font-minecraft text-[10px] px-5 py-3 rounded cursor-pointer active:scale-95 transition"
+              className="w-full sm:w-auto sm:shrink-0 btn-mc-emerald text-white font-minecraft text-[10px] px-5 py-3 rounded cursor-pointer active:scale-95 transition"
             >
               {copiado ? '¡COPIADO!' : 'COPIAR IP'}
             </button>
