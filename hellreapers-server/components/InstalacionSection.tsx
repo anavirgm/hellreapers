@@ -16,7 +16,9 @@ export default function InstalacionSection({ linkModpack }: InstalacionSectionPr
 
   return (
     <section id='instalacion' className='py-30 px-4 max-w-7xl mx-auto'>
+      
       <div className='mc-card-highlight p-8 md:p-12 rounded-3xl relative overflow-hidden'>
+        
         <div className='max-w-2xl mb-10'>
           <span className='text-slate-400 font-minecraft text-[10px] uppercase'>PASO A PASO</span>
           <h2 className='text-2xl sm:text-3xl font-minecraft text-white mt-2'>¿CÓMO ENTRAR?</h2>
