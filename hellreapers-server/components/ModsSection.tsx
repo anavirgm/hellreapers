@@ -15,7 +15,7 @@ interface ModsSectionProps {
 
 export default function ModsSection({ mods }: ModsSectionProps) {
   return (
-    <section id='mods' className='py-16 px-4 max-w-7xl mx-auto'>
+    <section id='mods' className='py-30 px-4 max-w-7xl mx-auto'>
       <div className='text-center max-w-2xl mx-auto mb-14'>
         <h2 className='text-2xl sm:text-3xl font-minecraft text-white tracking-wide'>MODS DESTACADOS</h2>
         <p className='text-slate-400 mt-2 text-sm'>Una selección de los mods instalados en el servidor para enriquecer la experiencia.</p>

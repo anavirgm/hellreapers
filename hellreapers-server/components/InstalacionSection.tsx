@@ -8,14 +8,14 @@ interface InstalacionSectionProps {
 
 export default function InstalacionSection({ linkModpack }: InstalacionSectionProps) {
   const pasos = [
-    { paso: '01', title: 'Java 17', desc: 'Instala Java 17 de 64 bits en tu equipo.' },
+    { paso: '01', title: 'Java 17', desc: 'Ten instalado Java en tu equipo.' },
     { paso: '02', title: 'Forge 1.20.1', desc: 'Descarga e instala Forge para la versión 1.20.1.' },
     { paso: '03', title: 'Descargar Zip', desc: 'Obtén el archivo comprimido del modpack.' },
     { paso: '04', title: 'Pegar Mods', desc: 'Descomprime y copia los mods en tu carpeta .minecraft/mods.' },
   ];
 
   return (
-    <section id='instalacion' className='py-20 px-4 max-w-7xl mx-auto'>
+    <section id='instalacion' className='py-30 px-4 max-w-7xl mx-auto'>
       <div className='mc-card-highlight p-8 md:p-12 rounded-3xl relative overflow-hidden'>
         <div className='max-w-2xl mb-10'>
           <span className='text-slate-400 font-minecraft text-[10px] uppercase'>PASO A PASO</span>

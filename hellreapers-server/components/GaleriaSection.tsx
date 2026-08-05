@@ -15,9 +15,9 @@ interface GaleriaSectionProps {
 
 export default function GaleriaSection({ capturas, onSelectImage }: GaleriaSectionProps) {
   return (
-    <section id='galeria' className='py-16 px-4 max-w-7xl mx-auto'>
+    <section id='galeria' className='py-30 px-4 max-w-7xl mx-auto'>
       <div className='text-center max-w-2xl mx-auto mb-12'>
-        <span className='text-slate-400 font-minecraft text-[10px] uppercase'>CAPTURAS</span>
+        <span className='text-slate-400 font-minecraft text-[10px] uppercase'>GALERÍA</span>
         <h2 className='text-2xl sm:text-3xl font-minecraft text-white mt-1'>MUNDO Y AVENTURA</h2>
         <p className='text-slate-400 mt-2 text-sm'>Echa un vistazo a los paisajes y la experiencia dentro de Hellreapers.</p>
       </div>
