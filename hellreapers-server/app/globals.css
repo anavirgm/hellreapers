@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;900&family=Press+Start+2P&display=swap');
-@import "tailwindcss";
+@import 'tailwindcss';
 
 html {
   scroll-behavior: smooth;
@@ -20,7 +20,7 @@ body {
 /* Patrón sutil estilo cuadrícula de bloques */
 .bg-mc-pattern {
   background-size: 32px 32px;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
 }

@@ -93,10 +93,30 @@ export default function Home() {
 
   const modsPrincipales = [
     { nombre: 'The Aether', cat: 'Dimensión', desc: 'Explora las islas flotantes en el cielo, nuevos materiales, estructuras y jefes.', icono: '☁️' },
-    { nombre: 'Terralith', cat: 'Mundo', desc: 'Generación de terreno avanzada con casi 100 biomas naturales sin añadir bloques extra.', icono: '🏔️' },
-    { nombre: "Farmer's Delight", cat: 'Cocina', desc: 'Amplía la agricultura y gastronomía con nuevas cosechas, platillos e ingredientes.', icono: '🍳' },
-    { nombre: 'Deeper and Darker', cat: 'Dimensión', desc: 'Aventúrate más allá de la ciudad del Deep Dark en la dimensión del Otherside.', icono: '👁️' },
-    { nombre: 'Sophisticated Backpacks', cat: 'Utilidad', desc: 'Mochilas personalizables con mejoras de almacenamiento, alimentación e ítems.', icono: '🎒' },
+    {
+      nombre: 'Terralith',
+      cat: 'Mundo',
+      desc: 'Generación de terreno avanzada con casi 100 biomas naturales sin añadir bloques extra.',
+      icono: '🏔️',
+    },
+    {
+      nombre: "Farmer's Delight",
+      cat: 'Cocina',
+      desc: 'Amplía la agricultura y gastronomía con nuevas cosechas, platillos e ingredientes.',
+      icono: '🍳',
+    },
+    {
+      nombre: 'Deeper and Darker',
+      cat: 'Dimensión',
+      desc: 'Aventúrate más allá de la ciudad del Deep Dark en la dimensión del Otherside.',
+      icono: '👁️',
+    },
+    {
+      nombre: 'Sophisticated Backpacks',
+      cat: 'Utilidad',
+      desc: 'Mochilas personalizables con mejoras de almacenamiento, alimentación e ítems.',
+      icono: '🎒',
+    },
     { nombre: 'Waystones', cat: 'Viaje', desc: 'Puntos de teletransporte para moverte velozmente por todo el mapa.', icono: '🗿' },
   ];
 
@@ -107,14 +127,22 @@ export default function Home() {
   ];
 
   const reglas = [
-    { id: 1, t: 'Respeto mutuo y buena convivencia', d: 'Prohibido el acoso, la discriminación, Insultos o la toxicidad en los chats del juego o Discord.' },
-    { id: 2, t: 'Prohibido el uso de Cheats / X-Ray', d: 'El uso de hacks, clientes modificados no autorizados o X-Ray resultará en baneo permanente.' },
+    {
+      id: 1,
+      t: 'Respeto mutuo y buena convivencia',
+      d: 'Prohibido el acoso, la discriminación, Insultos o la toxicidad en los chats del juego o Discord.',
+    },
+    {
+      id: 2,
+      t: 'Prohibido el uso de Cheats / X-Ray',
+      d: 'El uso de hacks, clientes modificados no autorizados o X-Ray resultará en baneo permanente.',
+    },
     { id: 3, t: 'No Griefing ni Robos', d: 'Respeta las edificaciones y granjas de otros jugadores, incluso en áreas sin proteger.' },
     { id: 4, t: 'Optimización de Redstone', d: 'Evita crear bucles infinitos o granjas masivas que afecten los TPS globales del servidor.' },
   ];
 
   return (
-    <div className="min-h-screen bg-[#0b0f17] bg-mc-pattern text-slate-100 relative selection:bg-slate-700 selection:text-white">
+    <div className='min-h-screen bg-[#0b0f17] bg-mc-pattern text-slate-100 relative selection:bg-slate-700 selection:text-white'>
       <Navbar logoUrl={URL_LOGO} linkDiscord={LINK_DISCORD} jugadores={jugadores} />
 
       <HeroSection
@@ -135,66 +163,79 @@ export default function Home() {
 
       <ReglasSection reglas={reglas} />
 
-      <Footer
-        logoUrl={URL_LOGO}
-        linkDiscord={LINK_DISCORD}
-        onOpenModal={(tipo) => setModalContenido(tipo)}
-      />
+      <Footer logoUrl={URL_LOGO} linkDiscord={LINK_DISCORD} onOpenModal={(tipo) => setModalContenido(tipo)} />
 
       {/* MODAL VISOR DE CAPTURAS DE PANTALLA */}
       {imagenModal && (
         <div
           onClick={() => setImagenModal(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md cursor-pointer"
+          className='fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md cursor-pointer'
         >
-          <div className="relative max-w-5xl w-full flex flex-col items-center">
+          <div className='relative max-w-5xl w-full flex flex-col items-center'>
             <img
               src={imagenModal}
-              alt="Captura ampliada"
-              className="max-h-[85vh] w-auto rounded-xl border-2 border-slate-700 shadow-2xl object-contain"
+              alt='Captura ampliada'
+              className='max-h-[85vh] w-auto rounded-xl border-2 border-slate-700 shadow-2xl object-contain'
             />
-            <p className="text-slate-400 text-xs font-minecraft mt-4">Haz clic en cualquier lugar para cerrar</p>
+            <p className='text-slate-400 text-xs font-minecraft mt-4'>Haz clic en cualquier lugar para cerrar</p>
           </div>
         </div>
       )}
 
       {/* MODAL LEGAL */}
       {modalContenido && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="mc-card-highlight max-w-2xl w-full p-6 sm:p-8 rounded-2xl relative space-y-4 max-h-[85vh] overflow-y-auto">
+        <div className='fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm'>
+          <div className='mc-card-highlight max-w-2xl w-full p-6 sm:p-8 rounded-2xl relative space-y-4 max-h-[85vh] overflow-y-auto'>
             <button
-              type="button"
+              type='button'
               onClick={() => setModalContenido(null)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-white font-mono text-xl font-bold bg-slate-800 px-3 py-1 rounded border border-slate-700 cursor-pointer"
+              className='absolute top-4 right-4 text-slate-400 hover:text-white font-mono text-xl font-bold bg-slate-800 px-3 py-1 rounded border border-slate-700 cursor-pointer'
             >
               ✕
             </button>
 
             {modalContenido === 'terminos' ? (
               <>
-                <h3 className="font-minecraft text-lg text-white">TÉRMINOS Y CONDICIONES</h3>
-                <div className="text-slate-300 text-xs sm:text-sm space-y-3 leading-relaxed border-t border-slate-800 pt-4">
-                  <p>1. <strong>Uso del Servidor:</strong> Al acceder al servidor Hellreapers, aceptas respetar las normas comunitarias y a los administradores.</p>
-                  <p>2. <strong>Baneos y Sanciones:</strong> Nos reservamos el derecho de sancionar o denegar el acceso a cualquier jugador que rompa las reglas o promueva un ambiente tóxico.</p>
-                  <p>3. <strong>Sin Afiliación:</strong> Este servidor es una comunidad independiente y no está afiliado ni avalado por Mojang AB o Microsoft.</p>
+                <h3 className='font-minecraft text-lg text-white'>TÉRMINOS Y CONDICIONES</h3>
+                <div className='text-slate-300 text-xs sm:text-sm space-y-3 leading-relaxed border-t border-slate-800 pt-4'>
+                  <p>
+                    1. <strong>Uso del Servidor:</strong> Al acceder al servidor Hellreapers, aceptas respetar las normas comunitarias y a los
+                    administradores.
+                  </p>
+                  <p>
+                    2. <strong>Baneos y Sanciones:</strong> Nos reservamos el derecho de sancionar o denegar el acceso a cualquier jugador que rompa
+                    las reglas o promueva un ambiente tóxico.
+                  </p>
+                  <p>
+                    3. <strong>Sin Afiliación:</strong> Este servidor es una comunidad independiente y no está afiliado ni avalado por Mojang AB o
+                    Microsoft.
+                  </p>
                 </div>
               </>
             ) : (
               <>
-                <h3 className="font-minecraft text-lg text-white">POLÍTICA DE PRIVACIDAD</h3>
-                <div className="text-slate-300 text-xs sm:text-sm space-y-3 leading-relaxed border-t border-slate-800 pt-4">
-                  <p>1. <strong>Datos Recopilados:</strong> Únicamente recopilamos información técnica básica como tu nombre de usuario dentro de Minecraft y dirección IP con el único fin de permitir el acceso al servidor.</p>
-                  <p>2. <strong>Uso de Información:</strong> No compartimos ni vendemos tus datos a ningún tercero.</p>
-                  <p>3. <strong>Cookies:</strong> Esta página web utiliza únicamente almacenamiento local básico para guardar preferencias del usuario en tu navegador.</p>
+                <h3 className='font-minecraft text-lg text-white'>POLÍTICA DE PRIVACIDAD</h3>
+                <div className='text-slate-300 text-xs sm:text-sm space-y-3 leading-relaxed border-t border-slate-800 pt-4'>
+                  <p>
+                    1. <strong>Datos Recopilados:</strong> Únicamente recopilamos información técnica básica como tu nombre de usuario dentro de
+                    Minecraft y dirección IP con el único fin de permitir el acceso al servidor.
+                  </p>
+                  <p>
+                    2. <strong>Uso de Información:</strong> No compartimos ni vendemos tus datos a ningún tercero.
+                  </p>
+                  <p>
+                    3. <strong>Cookies:</strong> Esta página web utiliza únicamente almacenamiento local básico para guardar preferencias del usuario
+                    en tu navegador.
+                  </p>
                 </div>
               </>
             )}
 
-            <div className="pt-4 text-right">
+            <div className='pt-4 text-right'>
               <button
-                type="button"
+                type='button'
                 onClick={() => setModalContenido(null)}
-                className="btn-mc-diamond text-white font-minecraft text-xs px-5 py-2.5 rounded cursor-pointer"
+                className='btn-mc-diamond text-white font-minecraft text-xs px-5 py-2.5 rounded cursor-pointer'
               >
                 ENTENDIDO
               </button>
