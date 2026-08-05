@@ -85,11 +85,11 @@ export default function Home() {
   };
 
   const stats = [
-    { label: 'VERSIÓN', val: '1.20.1', color: 'text-slate-100' },
-    { label: 'RENDIMIENTO', val: '20 TPS', color: 'text-emerald-400' },
-    { label: 'MODS', val: '+80', color: 'text-slate-100' },
-    { label: 'COMUNIDAD', val: 'DISCORD', color: 'text-sky-400' },
-  ];
+  { label: 'VERSIÓN', val: '1.20.1', color: 'text-violet-400' },
+  { label: 'ACCESO', val: 'PREMIUM', color: 'text-amber-400' },
+  { label: 'MODS', val: '+80', color: 'text-emerald-400' },
+  { label: 'COMUNIDAD', val: 'DISCORD', color: 'text-sky-400' },
+];
 
   const modsPrincipales = [
     { nombre: 'The Aether', cat: 'Dimensión', desc: 'Explora las islas flotantes en el cielo, nuevos materiales, estructuras y jefes.', icono: '☁️' },
