@@ -15,7 +15,6 @@ El sitio está diseñado para que los jugadores puedan revisar el estado del ser
 * **APIs integradas:**
   * Status del servidor & jugadores online: `mcstatus.io` / API personalizada
   * Renders de skins/avatares: `Visage API` (con fallback a Minotar)
-  * Mapa en vivo: Integración via iframe (Dynmap / BlueMap)
 
 
 ## 🚀 Cómo correrlo en local
