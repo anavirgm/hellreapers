@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HellReapers — Website
 
-## Getting Started
+Landing page oficial para **HellReapers**, un servidor Survival Modded de Minecraft (v1.20.1). 
 
-First, run the development server:
+El sitio está diseñado para que los jugadores puedan revisar el estado del servidor en tiempo real, copiar la IP con un clic, ver quiénes están conectados, explorar el mapa del mundo y descargar el modpack fácilmente.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Demo en vivo:** [hellreapers.vercel.app](https://hellreapers.vercel.app/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tecnologías utilizadas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* **Framework:** Next.js 14 (App Router)
+* **Estilos:** Tailwind CSS
+* **Lenguaje:** TypeScript
+* **Despliegue:** Vercel
+* **APIs integradas:**
+  * Status del servidor & jugadores online: `mcstatus.io` / API personalizada
+  * Renders de skins/avatares: `Visage API` (con fallback a Minotar)
+  * Mapa en vivo: Integración via iframe (Dynmap / BlueMap)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## 🚀 Cómo correrlo en local
 
-To learn more about Next.js, take a look at the following resources:
+Si quieres clonar el proyecto e instalarlo localmente:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clona este repositorio:**
+   ```bash
+   git clone https://github.com/anavirgm/hellreapers.git
+   cd hellreapers
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Instala las dependencias:**
+    ```bash
+   npm install
 
-## Deploy on Vercel
+3. **Inicia el servidor de desarrollo:**
+    ```bash
+    npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Abre http://localhost:3000 en tu navegador para verlo.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+---
+📄 Licencia
+Proyecto desarrollado para la comunidad de HellReapers. Libre de usar o modificar como base para otros servidores.
