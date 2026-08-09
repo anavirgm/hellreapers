@@ -30,7 +30,7 @@ export default function Navbar({ logoUrl, linkDiscord, jugadores }: NavbarProps)
           <a href='#inicio' className='hover:text-slate-100 transition'>INICIO</a>
           <a href='#instalacion' className='hover:text-slate-100 transition'>TUTORIAL</a>
           <a href='#galeria' className='hover:text-slate-100 transition'>GALERÍA</a>
-          <a href='#mods' className='hover:text-slate-100 transition'>MODS</a>
+            <a href='/mods' className='hover:text-slate-100 transition'>MODS</a>
           <a href='#reglas' className='hover:text-slate-100 transition'>REGLAS</a>
         </nav>
 
