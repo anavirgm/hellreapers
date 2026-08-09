@@ -58,24 +58,25 @@ export default function Footer({ logoUrl, discordGuildId = '123456789', linkDisc
 
         {/* COLUMNA 2: NAVEGACIÓN */}
         <div>
-          <span className='font-minecraft text-[10px] text-white uppercase block mb-3'>Navegación</span>
-          <p className='space-x-2'>
-            <a href='#inicio' className='hover:text-slate-200'>
+          <span className='font-minecraft text-[10px] text-white uppercase block mb-4'>Navegación</span>
+          <nav className='grid grid-cols-2 gap-2 max-w-sm' aria-label='Navegación del sitio'>
+            <a href='#inicio' className='group flex items-center justify-between rounded border border-slate-800 bg-slate-900/60 px-3 py-2.5 text-slate-300 transition hover:border-sky-800 hover:bg-slate-800 hover:text-white'>
               Inicio
-            </a>{' '}
-            •
-            <a href='#galeria' className='hover:text-slate-200'>
-              Galería
-            </a>{' '}
-            •
-            <a href='#mods' className='hover:text-slate-200'>
-              Mods
-            </a>{' '}
-            •
-            <a href='#instalacion' className='hover:text-slate-200'>
-              Tutorial
+              <span className='font-minecraft text-[9px] text-sky-500 transition-transform group-hover:translate-x-0.5'>&gt;</span>
             </a>
-          </p>
+            <a href='#instalacion' className='group flex items-center justify-between rounded border border-slate-800 bg-slate-900/60 px-3 py-2.5 text-slate-300 transition hover:border-sky-800 hover:bg-slate-800 hover:text-white'>
+              Tutorial
+              <span className='font-minecraft text-[9px] text-sky-500 transition-transform group-hover:translate-x-0.5'>&gt;</span>
+            </a>
+            <a href='#galeria' className='group flex items-center justify-between rounded border border-slate-800 bg-slate-900/60 px-3 py-2.5 text-slate-300 transition hover:border-sky-800 hover:bg-slate-800 hover:text-white'>
+              Galería
+              <span className='font-minecraft text-[9px] text-sky-500 transition-transform group-hover:translate-x-0.5'>&gt;</span>
+            </a>
+            <a href='/mods' className='group flex items-center justify-between rounded border border-sky-900/80 bg-sky-950/30 px-3 py-2.5 text-sky-300 transition hover:border-sky-500 hover:bg-sky-900/40 hover:text-white'>
+              Mods
+              <span className='font-minecraft text-[9px] text-sky-400 transition-transform group-hover:translate-x-0.5'>&gt;</span>
+            </a>
+          </nav>
         </div>
         <div>
           <span className='font-minecraft text-[10px] text-white uppercase block mb-3'>Legal</span>
