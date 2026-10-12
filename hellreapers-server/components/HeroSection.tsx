@@ -76,7 +76,7 @@ export default function HeroSection({ bgUrl, logoUrl, ipMostrada, copiado, copia
                     jugadores.lista.slice(0, 6).map((player, idx) => (
                       <img
                         key={idx}
-                        src={`https://visage.surgeplay.com/face/64/${player.uuid || player.name}`}
+                        src={`https://vzge.me/face/64/${player.uuid || player.name}`}
                         alt={player.name}
                         title={player.name}
                         onError={(e) => {
@@ -88,12 +88,12 @@ export default function HeroSection({ bgUrl, logoUrl, ipMostrada, copiado, copia
                   ) : (
                     <div className='flex -space-x-2'>
                       <img
-                        src='https://visage.surgeplay.com/face/64/MHF_Steve'
+                        src='https://vzge.me/face/64/X-Steve'
                         alt='Steve'
                         className='inline-block h-9 w-9 rounded-md ring-2 ring-slate-900 bg-slate-800'
                       />
                       <img
-                        src='https://visage.surgeplay.com/face/64/MHF_Alex'
+                        src='https://vzge.me/face/64/X-Alex'
                         alt='Alex'
                         className='inline-block h-9 w-9 rounded-md ring-2 ring-slate-900 bg-slate-800'
                       />
