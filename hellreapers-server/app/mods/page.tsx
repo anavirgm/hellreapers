@@ -100,10 +100,11 @@ export default function ModsPage() {
 
       <section className='max-w-7xl mx-auto px-4 py-16 sm:py-24'>
         <div className='max-w-3xl mb-14'>
-          <p className='font-minecraft text-[10px] text-sky-400 tracking-wider mb-4'>MINECRAFT 1.20.1 FORGE</p>
+          <p className='font-minecraft text-[10px] text-sky-400 tracking-wider mb-4'>HISTÓRICO · FORGE 1.20.1</p>
           <h1 className='font-minecraft text-2xl sm:text-4xl leading-relaxed text-white mc-text-glow'>LISTA DE MODS</h1>
           <p className='text-slate-400 mt-5 text-sm sm:text-base leading-relaxed'>
-            Todos los mods instalados actualmente en Hellreapers. Asegurate de usar el modpack oficial para mantener tu cliente compatible.
+            Registro histórico del modpack de la era Survival Modded. El servidor actual es Hardcore de Fabric
+            <strong> sin mods</strong>; esta lista se conserva por si el modpack vuelve a estar disponible.
           </p>
         </div>
 

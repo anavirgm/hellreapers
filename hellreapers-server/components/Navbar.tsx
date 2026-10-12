@@ -5,6 +5,7 @@ import React from 'react';
 interface NavbarProps {
   logoUrl: string;
   linkDiscord: string;
+  modsEnabled?: boolean;
   jugadores: {
     cargando: boolean;
     activo: boolean;
@@ -13,7 +14,7 @@ interface NavbarProps {
   };
 }
 
-export default function Navbar({ logoUrl, linkDiscord, jugadores }: NavbarProps) {
+export default function Navbar({ logoUrl, linkDiscord, modsEnabled = false, jugadores }: NavbarProps) {
   return (
     <header className='fixed top-0 left-0 right-0 z-50 bg-[#0b0f17]/95 backdrop-blur-md border-b-2 border-slate-800'>
       <div className='max-w-7xl mx-auto px-4 h-20 flex items-center justify-between'>
@@ -30,7 +31,9 @@ export default function Navbar({ logoUrl, linkDiscord, jugadores }: NavbarProps)
           <a href='#inicio' className='hover:text-slate-100 transition'>INICIO</a>
           <a href='#instalacion' className='hover:text-slate-100 transition'>TUTORIAL</a>
           <a href='#galeria' className='hover:text-slate-100 transition'>GALERÍA</a>
+          {modsEnabled && (
             <a href='/mods' className='hover:text-slate-100 transition'>MODS</a>
+          )}
           <a href='#reglas' className='hover:text-slate-100 transition'>REGLAS</a>
         </nav>
 

@@ -17,6 +17,13 @@ export default function Home() {
   const URL_IMAGEN_FONDO = '/images/banner.png';
   const URL_LOGO = '/favicon.ico';
 
+  // Interruptor global de mods.
+  // HellReapers es hoy un servidor Hardcore de Fabric SIN mods, así que la sección
+  // de mods, la página /mods y el botón del modpack quedan desactivados.
+  // El código y los datos se conservan intactos por si vuelven los mods: basta
+  // con poner este flag en true.
+  const MODS_ENABLED = false;
+
   const [copiado, setCopiado] = useState(false);
   const [modalContenido, setModalContenido] = useState<'terminos' | 'privacidad' | null>(null);
   const [imagenModal, setImagenModal] = useState<string | null>(null);
@@ -155,15 +162,15 @@ export default function Home() {
         stats={stats}
       />
 
-      <InstalacionSection linkModpack={LINK_MODPACK} />
+      <InstalacionSection linkModpack={LINK_MODPACK} mostrarModpack={MODS_ENABLED} />
 
       <GaleriaSection capturas={capturasGaleria} onSelectImage={(url) => setImagenModal(url)} />
 
-      <ModsSection mods={modsPrincipales} />
+      {MODS_ENABLED && <ModsSection mods={modsPrincipales} />}
 
       <ReglasSection reglas={reglas} />
 
-      <Footer logoUrl={URL_LOGO} linkDiscord={LINK_DISCORD} onOpenModal={(tipo) => setModalContenido(tipo)} />
+      <Footer logoUrl={URL_LOGO} linkDiscord={LINK_DISCORD} modsEnabled={MODS_ENABLED} onOpenModal={(tipo) => setModalContenido(tipo)} />
 
       {/* MODAL VISOR DE CAPTURAS DE PANTALLA */}
       {imagenModal && (

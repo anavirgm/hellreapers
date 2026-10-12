@@ -4,15 +4,16 @@ import React from 'react';
 
 interface InstalacionSectionProps {
   linkModpack: string;
+  mostrarModpack?: boolean;
 }
 
-export default function InstalacionSection({ linkModpack }: InstalacionSectionProps) {
+export default function InstalacionSection({ linkModpack, mostrarModpack = false }: InstalacionSectionProps) {
   const pasos = [
-    { paso: '01', title: 'Java 17', desc: 'Instala Java 17 de 64 bits en tu equipo.' },
-    { paso: '02', title: 'Forge 1.20.1', desc: 'Instala el launcher de Forge para la versión 1.20.1.' },
-    { paso: '03', title: 'Pegar Mods', desc: 'Descarga el ZIP y mueve los mods a .minecraft/mods.' },
+    { paso: '01', title: 'Abre Minecraft', desc: 'Usa el launcher oficial de Minecraft Java Edition. No necesitas instalar Forge ni Fabric en tu PC.' },
+    { paso: '02', title: 'Sin mods', desc: 'El servidor no requiere mods: puedes entrar con el juego base.' },
+    { paso: '03', title: 'Versión 26.3', desc: 'Selecciona la versión 26.3 en tus instalaciones del launcher.' },
     { paso: '04', title: 'Copiar IP', desc: 'Copia la dirección del servidor usando el botón de arriba.' },
-    { paso: '05', title: '¡A Jugar!', desc: 'Abre el juego, ve a Multijugador, pega la IP y conéctate.' },
+    { paso: '05', title: '¡A jugar!', desc: 'Ve a Multijugador, pega la IP, entra y sobrevive.' },
   ];
 
   return (

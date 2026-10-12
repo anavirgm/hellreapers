@@ -6,10 +6,11 @@ interface FooterProps {
   logoUrl: string;
   discordGuildId?: string; // ID de tu servidor de Discord (Opcional)
   linkDiscord: string;
+  modsEnabled?: boolean;
   onOpenModal: (contenido: 'terminos' | 'privacidad') => void;
 }
 
-export default function Footer({ logoUrl, discordGuildId = '123456789', linkDiscord, onOpenModal }: FooterProps) {
+export default function Footer({ logoUrl, discordGuildId = '123456789', linkDiscord, modsEnabled = false, onOpenModal }: FooterProps) {
   const [discordOnline, setDiscordOnline] = useState<number | null>(null);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ export default function Footer({ logoUrl, discordGuildId = '123456789', linkDisc
         if (data && typeof data.presence_count === 'number') {
           setDiscordOnline(data.presence_count);
         }
-      } catch (err) {
+      } catch {
         // Silencioso si no está activo el widget de Discord
       }
     };
@@ -72,10 +73,12 @@ export default function Footer({ logoUrl, discordGuildId = '123456789', linkDisc
               Galería
               <span className='font-minecraft text-[9px] text-sky-500 transition-transform group-hover:translate-x-0.5'>&gt;</span>
             </a>
-            <a href='/mods' className='group flex items-center justify-between rounded border border-sky-900/80 bg-sky-950/30 px-3 py-2.5 text-sky-300 transition hover:border-sky-500 hover:bg-sky-900/40 hover:text-white'>
-              Mods
-              <span className='font-minecraft text-[9px] text-sky-400 transition-transform group-hover:translate-x-0.5'>&gt;</span>
-            </a>
+            {modsEnabled && (
+              <a href='/mods' className='group flex items-center justify-between rounded border border-sky-900/80 bg-sky-950/30 px-3 py-2.5 text-sky-300 transition hover:border-sky-500 hover:bg-sky-900/40 hover:text-white'>
+                Mods
+                <span className='font-minecraft text-[9px] text-sky-400 transition-transform group-hover:translate-x-0.5'>&gt;</span>
+              </a>
+            )}
           </nav>
         </div>
         <div>
