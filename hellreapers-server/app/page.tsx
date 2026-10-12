@@ -59,7 +59,7 @@ export default function Home() {
         } else {
           setJugadores({ online: 0, max: 0, activo: false, cargando: false, lista: [] });
         }
-      } catch (error) {
+      } catch {
         setJugadores({ online: 0, max: 0, activo: false, cargando: false, lista: [] });
       }
     };
@@ -92,11 +92,11 @@ export default function Home() {
   };
 
   const stats = [
-  { label: 'VERSIÓN', val: '1.20.1', color: 'text-violet-400' },
-  { label: 'ACCESO', val: 'PREMIUM', color: 'text-amber-400' },
-  { label: 'MODS', val: '+80', color: 'text-emerald-400' },
-  { label: 'COMUNIDAD', val: 'DISCORD', color: 'text-sky-400' },
-];
+    { label: 'VERSIÓN', val: '26.3', color: 'text-violet-400' },
+    { label: 'MODO', val: 'HARDCORE', color: 'text-rose-400' },
+    { label: 'ACCESO', val: 'PREMIUM', color: 'text-amber-400' },
+    { label: 'COMUNIDAD', val: 'DISCORD', color: 'text-sky-400' },
+  ];
 
   const modsPrincipales = [
     { nombre: 'The Aether', cat: 'Dimensión', desc: 'Explora las islas flotantes en el cielo, nuevos materiales, estructuras y jefes.', icono: '☁️' },
@@ -128,8 +128,8 @@ export default function Home() {
   ];
 
   const capturasGaleria = [
-    { url: '/images/barco.png', titulo: 'Naturaleza Impresionante', desc: 'Biomas generados con Terralith' },
-    { url: '/images/vaca.png', titulo: 'La Dimensión de Caramelo', desc: 'Islas de comida y jefes legendarios' },
+    { url: '/images/barco.png', titulo: 'Naturaleza Impresionante', desc: 'Paisajes y biomas del mundo hardcore' },
+    { url: '/images/vaca.png', titulo: 'Supervivencia Pura', desc: 'Granjas y animales para sobrevivir' },
     { url: '/images/players.png', titulo: 'Comunidad en Acción', desc: 'Bases y construcciones en equipo' },
   ];
 
@@ -137,7 +137,7 @@ export default function Home() {
     {
       id: 1,
       t: 'Respeto mutuo y buena convivencia',
-      d: 'Prohibido el acoso, la discriminación, Insultos o la toxicidad en los chats del juego o Discord.',
+      d: 'Prohibido el acoso, la discriminación, insultos o la toxicidad en los chats del juego o Discord.',
     },
     {
       id: 2,
@@ -145,12 +145,22 @@ export default function Home() {
       d: 'El uso de hacks, clientes modificados no autorizados o X-Ray resultará en baneo permanente.',
     },
     { id: 3, t: 'No Griefing ni Robos', d: 'Respeta las edificaciones y granjas de otros jugadores, incluso en áreas sin proteger.' },
-    { id: 4, t: 'Optimización de Redstone', d: 'Evita crear bucles infinitos o granjas masivas que afecten los TPS globales del servidor.' },
+    {
+      id: 4,
+      t: 'Una sola vida (Hardcore)',
+      d: 'La muerte es permanente durante la temporada. No se reviven jugadores ni se restauran sus ítems.',
+    },
+    {
+      id: 5,
+      t: 'Sin cuentas alternas',
+      d: 'Usar una cuenta alt para evadir una muerte o un baneo resultará en sanción permanente.',
+    },
+    { id: 6, t: 'Optimización del servidor', d: 'Evita granjas masivas o bucles de redstone que afecten los TPS globales del servidor.' },
   ];
 
   return (
     <div className='min-h-screen bg-[#0b0f17] bg-mc-pattern text-slate-100 relative selection:bg-slate-700 selection:text-white'>
-      <Navbar logoUrl={URL_LOGO} linkDiscord={LINK_DISCORD} jugadores={jugadores} />
+      <Navbar logoUrl={URL_LOGO} linkDiscord={LINK_DISCORD} jugadores={jugadores} modsEnabled={MODS_ENABLED} />
 
       <HeroSection
         bgUrl={URL_IMAGEN_FONDO}

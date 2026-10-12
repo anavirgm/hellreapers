@@ -1,20 +1,20 @@
 # HellReapers — Website
 
-Landing page oficial para **HellReapers**, un servidor Survival Modded de Minecraft (v1.20.1). 
+Landing page oficial para **HellReapers**, un servidor **Hardcore** de Minecraft (**26.3**) sobre **Fabric**, sin mods. 
 
-El sitio está diseñado para que los jugadores puedan revisar el estado del servidor en tiempo real, copiar la IP con un clic, ver quiénes están conectados, explorar el mapa del mundo y descargar el modpack fácilmente.
+El sitio está diseñado para que los jugadores puedan revisar el estado del servidor en tiempo real, copiar la IP con un clic y ver quiénes están conectados.
 
 **Demo en vivo:** [hellreapers.vercel.app](https://hellreapers.vercel.app/)
 
 ## 🛠️ Tecnologías utilizadas
 
-* **Framework:** Next.js 14 (App Router)
+* **Framework:** Next.js 16 (App Router)
 * **Estilos:** Tailwind CSS
 * **Lenguaje:** TypeScript
 * **Despliegue:** Vercel
 * **APIs integradas:**
-  * Status del servidor & jugadores online: `mcstatus.io` / API personalizada
-  * Renders de skins/avatares: `Visage API` (con fallback a Minotar)
+  * Status del servidor & jugadores online: `mcstatus.io`
+  * Renders de skins/avatares: `VZGE` (ex Visage, `https://vzge.me`) con fallback a Minotar
 
 
 ## 🚀 Cómo correrlo en local

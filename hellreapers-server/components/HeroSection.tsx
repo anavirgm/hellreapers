@@ -34,7 +34,7 @@ export default function HeroSection({ bgUrl, logoUrl, ipMostrada, copiado, copia
         </div>
 
         <div className='inline-flex items-center gap-2 bg-slate-900/90 border border-slate-700 text-slate-300 text-base font-minecraft px-4 py-2 rounded shadow-lg'>
-          SURVIVAL MODDED 1.20.1
+          HARDCORE · FABRIC 26.3
         </div>
 
         <h1 className='text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-none drop-shadow-2xl'>
@@ -44,7 +44,7 @@ export default function HeroSection({ bgUrl, logoUrl, ipMostrada, copiado, copia
 
         {/* CORRECCIÓN 1: Añadido padding horizontal y ajuste de palabras para evitar desborde */}
         <p className='text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed px-2 break-words'>
-          Explora un mundo cúbico infinito potenciado con aventura, magia ancestral y una comunidad activa.
+          Sobrevive en un mundo hardcore donde cada decisión cuenta. Una sola vida, sin mods y con una comunidad lista para el reto.
         </p>
 
         <div className='pt-2 max-w-2xl mx-auto w-full'>

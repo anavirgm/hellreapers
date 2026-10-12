@@ -39,7 +39,7 @@ export default function Footer({ logoUrl, discordGuildId = '123456789', linkDisc
             <img src={logoUrl} alt='Logo Footer' className='w-8 h-8 object-contain' />
             <div>
               <span className='font-minecraft text-sm text-slate-200 uppercase block mb-1'>HELLREAPERS</span>
-              <p>Servidor Survival Modded de Minecraft 1.20.1.</p>
+              <p>Servidor Hardcore de Minecraft 26.3 sobre Fabric.</p>
             </div>
           </div>
 

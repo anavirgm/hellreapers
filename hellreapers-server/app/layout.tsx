@@ -13,13 +13,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'HellReapers',
-  description: 'HellReapers WebSite',
+  title: 'HellReapers — Servidor Hardcore de Minecraft',
+  description:
+    'HellReapers es un servidor Hardcore de Minecraft 26.3 sobre Fabric. Una sola vida, sin mods y con una comunidad activa. Entra y sobrevive.',
+  openGraph: {
+    title: 'HellReapers — Servidor Hardcore de Minecraft',
+    description: 'Servidor Hardcore de Minecraft 26.3 sobre Fabric. Una sola vida.',
+    url: 'https://hellreapers.vercel.app',
+    siteName: 'HellReapers',
+    locale: 'es_ES',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang='en' data-scroll-behavior='smooth' className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang='es' data-scroll-behavior='smooth' className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className='min-h-full flex flex-col'>{children}</body>
     </html>
   );

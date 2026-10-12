@@ -37,16 +37,20 @@ export default function InstalacionSection({ linkModpack, mostrarModpack = false
           ))}
         </div>
 
-        <div className='mt-8 md:mt-10 text-center'>
-          <a
-            href={linkModpack}
-            target='_blank'
-            rel='noreferrer'
-            className='inline-block btn-mc-emerald text-white font-minecraft text-xs px-8 py-4 rounded cursor-pointer active:scale-95 transition'
-          >
-            📥 DESCARGAR MODPACK (.ZIP)
-          </a>
-        </div>
+        {/* El botón del modpack solo se muestra si MODS_ENABLED está activo.
+            El código se conserva por si el servidor vuelve a usar mods. */}
+        {mostrarModpack && (
+          <div className='mt-8 md:mt-10 text-center'>
+            <a
+              href={linkModpack}
+              target='_blank'
+              rel='noreferrer'
+              className='inline-block btn-mc-emerald text-white font-minecraft text-xs px-8 py-4 rounded cursor-pointer active:scale-95 transition'
+            >
+              📥 DESCARGAR MODPACK (.ZIP)
+            </a>
+          </div>
+        )}
       </div>
     </section>
   );
