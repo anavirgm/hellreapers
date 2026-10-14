@@ -9,7 +9,11 @@ interface InstalacionSectionProps {
 
 export default function InstalacionSection({ linkModpack, mostrarModpack = false }: InstalacionSectionProps) {
   const pasos = [
-    { paso: '01', title: 'Abre Minecraft', desc: 'Usa el launcher oficial de Minecraft Java Edition. No necesitas instalar Forge ni Fabric en tu PC.' },
+    {
+      paso: '01',
+      title: 'Abre Minecraft',
+      desc: 'Usa el launcher oficial de Minecraft Java Edition. No necesitas instalar Forge ni Fabric en tu PC.',
+    },
     { paso: '02', title: 'Sin mods', desc: 'El servidor no requiere mods: puedes entrar con el juego base.' },
     { paso: '03', title: 'Versión 26.3', desc: 'Selecciona la versión 26.3 en tus instalaciones del launcher.' },
     { paso: '04', title: 'Copiar IP', desc: 'Copia la dirección del servidor usando el botón de arriba.' },
@@ -47,7 +51,7 @@ export default function InstalacionSection({ linkModpack, mostrarModpack = false
               rel='noreferrer'
               className='inline-block btn-mc-emerald text-white font-minecraft text-xs px-8 py-4 rounded cursor-pointer active:scale-95 transition'
             >
-              📥 DESCARGAR MODPACK (.ZIP)
+              <span aria-hidden='true'>📥 </span>DESCARGAR MODPACK (.ZIP)
             </a>
           </div>
         )}

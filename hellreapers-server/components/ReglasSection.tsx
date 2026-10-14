@@ -34,7 +34,9 @@ export default function ReglasSection({ reglas }: ReglasSectionProps) {
               <button
                 type='button'
                 onClick={() => toggleRegla(r.id)}
-                className='w-full p-5 text-left flex items-center justify-between cursor-pointer focus:outline-none hover:bg-slate-800/40 transition-colors'
+                aria-expanded={isOpen}
+                aria-controls={`regla-panel-${r.id}`}
+                className='w-full p-5 text-left flex items-center justify-between cursor-pointer hover:bg-slate-800/40 transition-colors'
               >
                 <div className='flex items-center gap-4'>
                   <span className='w-8 h-8 rounded bg-slate-800 border border-slate-700 flex items-center justify-center font-minecraft text-slate-200 text-xs'>
@@ -42,16 +44,17 @@ export default function ReglasSection({ reglas }: ReglasSectionProps) {
                   </span>
                   <h3 className='font-bold text-white text-base'>{r.t}</h3>
                 </div>
-                <span className='text-slate-300 font-bold text-xl font-mono px-2.5 py-0.5 rounded bg-slate-800 border border-slate-700'>
+                <span
+                  aria-hidden='true'
+                  className='text-slate-300 font-bold text-xl font-mono px-2.5 py-0.5 rounded bg-slate-800 border border-slate-700'
+                >
                   {isOpen ? '−' : '+'}
                 </span>
               </button>
 
-              {isOpen && (
-                <div className='px-5 pb-5 pt-2 border-t border-slate-800/80 bg-slate-900/30'>
-                  <p className='text-slate-300 text-sm sm:pl-12 leading-relaxed'>{r.d}</p>
-                </div>
-              )}
+              <div id={`regla-panel-${r.id}`} hidden={!isOpen} className='px-5 pb-5 pt-2 border-t border-slate-800/80 bg-slate-900/30'>
+                <p className='text-slate-300 text-sm sm:pl-12 leading-relaxed'>{r.d}</p>
+              </div>
             </div>
           );
         })}

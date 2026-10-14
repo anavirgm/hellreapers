@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 
 interface HeroSectionProps {
   bgUrl: string;
@@ -20,16 +21,19 @@ export default function HeroSection({ bgUrl, logoUrl, ipMostrada, copiado, copia
   return (
     <section id='inicio' className='relative w-full min-h-screen flex items-center justify-center pt-28 pb-16 px-4 overflow-hidden'>
       <div className='absolute inset-0 w-full h-full z-0'>
-        <img src={bgUrl} alt='Hellreapers Background' className='w-full h-full object-cover object-center scale-105 filter brightness-90' />
+        <Image src={bgUrl} alt='' fill priority sizes='100vw' className='object-cover object-center scale-105 brightness-90' />
         <div className='absolute inset-0 bg-gradient-to-b from-[#0b0f17]/40 via-[#0b0f17]/65 to-[#0b0f17]' />
       </div>
 
       <div className='max-w-5xl mx-auto text-center space-y-6 relative z-10'>
         <div className='flex justify-center mb-2'>
-          <img
+          <Image
             src={logoUrl}
-            alt='Hellreapers Big Logo'
-            className='w-28 h-28 sm:w-36 sm:h-36 object-contain drop-shadow-[0_0_25px_rgba(56,189,248,0.6)]'
+            alt='HellReapers'
+            width={144}
+            height={144}
+            priority
+            className='h-28 w-28 sm:h-36 sm:w-36 object-contain drop-shadow-[0_0_25px_rgba(56,189,248,0.6)]'
           />
         </div>
 
@@ -42,17 +46,14 @@ export default function HeroSection({ bgUrl, logoUrl, ipMostrada, copiado, copia
           <span className='font-minecraft text-sky-400 mc-text-glow text-3xl sm:text-5xl lg:text-6xl block mt-3'>HELLREAPERS!</span>
         </h1>
 
-        {/* CORRECCIÓN 1: Añadido padding horizontal y ajuste de palabras para evitar desborde */}
         <p className='text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed px-2 break-words'>
           Sobrevive en un mundo hardcore donde cada decisión cuenta. Una sola vida, sin mods y con una comunidad lista para el reto.
         </p>
 
         <div className='pt-2 max-w-2xl mx-auto w-full'>
-          {/* CORRECCIÓN 2: Ajuste de padding, alineación y gaps para móviles */}
           <div className='mc-card-highlight p-5 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 sm:gap-4'>
             <div className='text-left w-full sm:w-auto px-1'>
               <span className='text-[10px] font-minecraft text-slate-400 uppercase block mb-1'>DIRECCIÓN IP</span>
-              {/* CORRECCIÓN 3: Permitir break-all para IPs muy largas y ligero ajuste de fuente en móvil */}
               <span className='text-sm sm:text-base font-mono font-bold text-slate-100 select-all break-all block'>{ipMostrada}</span>
             </div>
 
@@ -66,7 +67,7 @@ export default function HeroSection({ bgUrl, logoUrl, ipMostrada, copiado, copia
           </div>
         </div>
 
-        {/* AVATARES EN VIVO - Se mantiene igual, ya que parece funcionar bien */}
+        {/* AVATARES EN VIVO */}
         {jugadores.activo && (
           <div className='flex flex-col items-center justify-center gap-2 pt-2'>
             {jugadores.online > 0 ? (
@@ -79,6 +80,10 @@ export default function HeroSection({ bgUrl, logoUrl, ipMostrada, copiado, copia
                         src={`https://vzge.me/face/64/${player.uuid || player.name}`}
                         alt={player.name}
                         title={player.name}
+                        width={36}
+                        height={36}
+                        loading='lazy'
+                        decoding='async'
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = `https://minotar.net/helm/${player.name}/64.png`;
                         }}
@@ -90,11 +95,19 @@ export default function HeroSection({ bgUrl, logoUrl, ipMostrada, copiado, copia
                       <img
                         src='https://vzge.me/face/64/X-Steve'
                         alt='Steve'
+                        width={36}
+                        height={36}
+                        loading='lazy'
+                        decoding='async'
                         className='inline-block h-9 w-9 rounded-md ring-2 ring-slate-900 bg-slate-800'
                       />
                       <img
                         src='https://vzge.me/face/64/X-Alex'
                         alt='Alex'
+                        width={36}
+                        height={36}
+                        loading='lazy'
+                        decoding='async'
                         className='inline-block h-9 w-9 rounded-md ring-2 ring-slate-900 bg-slate-800'
                       />
                     </div>

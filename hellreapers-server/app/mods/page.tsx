@@ -1,4 +1,14 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
+
+export const metadata: Metadata = {
+  title: 'Lista de mods — HellReapers',
+  description:
+    'Registro histórico de los mods del modpack de HellReapers (era Survival Modded, Forge 1.20.1). El servidor actual es Hardcore de Fabric sin mods.',
+  alternates: { canonical: '/mods' },
+  robots: { index: false, follow: true },
+};
 
 const mods = [
   ['The Aether', '1.5.2', 'Aventura'],
@@ -85,9 +95,12 @@ export default function ModsPage() {
       <header className='border-b-2 border-slate-800 bg-[#0b0f17]/95 backdrop-blur-md'>
         <div className='max-w-7xl mx-auto px-4 h-20 flex items-center justify-between'>
           <Link href='/' className='flex items-center gap-3 group'>
-            <img
-              src='/favicon.ico'
-              alt='Hellreapers Logo'
+            <Image
+              src='/images/logo.png'
+              alt=''
+              width={48}
+              height={48}
+              priority
               className='w-12 h-12 object-contain group-hover:scale-105 transition-transform drop-shadow-[0_0_8px_rgba(56,189,248,0.3)]'
             />
             <span className='font-minecraft text-sm tracking-wider text-slate-100'>HELLREAPERS</span>

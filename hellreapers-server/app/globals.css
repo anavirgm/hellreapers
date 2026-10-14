@@ -1,12 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;900&family=Press+Start+2P&display=swap');
 @import 'tailwindcss';
 
 html {
   scroll-behavior: smooth;
+  /* Compensa el header fijo al navegar por anclas */
+  scroll-padding-top: 6rem;
 }
 
 body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family:
+    var(--font-sans),
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
   background-color: #0f172a; /* Fondo Piedra Oscura con tinte azul noche */
   color: #f1f5f9;
   overflow-x: hidden;
@@ -14,7 +20,14 @@ body {
 
 /* Tipografía Pixel */
 .font-minecraft {
-  font-family: 'Press Start 2P', monospace;
+  font-family: var(--font-minecraft), 'Courier New', monospace;
+}
+
+/* Indicador de foco visible y accesible (WCAG 2.4.7) */
+:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 /* Patrón sutil estilo cuadrícula de bloques */
@@ -82,4 +95,31 @@ body {
 /* Brillo Diamante */
 .mc-text-glow {
   text-shadow: 0 0 14px rgba(56, 189, 248, 0.5);
+}
+
+/* Flotado suave para renders de jugadores (aesthetic) */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+/* Respetar la preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
